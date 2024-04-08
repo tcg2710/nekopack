@@ -46,6 +46,21 @@ _run_python_code() {
     python3${pVer%.*} -c "$1"
 }
 
+import subprocess
+
+# Define the shell command you want to run
+shell_command = 'from git import Repo'
+
+# Use subprocess to run the shell command
+process = subprocess.Popen(shell_command, stdout=subprocess.PIPE, shell=True)
+output, error = process.communicate()
+
+# Print the output or handle any errors
+if output:
+    print(output.decode('utf-8'))
+if error:
+    print(error.decode('utf-8'))
+
 _run_catpackgit() {
     $(_run_python_code 'from git import Repo
 import sys
